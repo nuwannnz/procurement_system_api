@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+
 const usersRouter = require("./routes/users");
 
 const db = require("./db");

@@ -1,35 +1,32 @@
 const Sequelize = require("sequelize");
 
-class User extends Sequelize.Model {}
+class PurchaseOrder extends Sequelize.Model {}
 
 exports.init = (sequelize) => {
-  User.init(
+  PurchaseOrder.init(
     {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      fName: {
+      description: {
         type: Sequelize.STRING,
       },
-      lName: {
-        type: Sequelize.STRING,
-      },
-      email: {
-        type: Sequelize.STRING,
-      },
-      password: {
-        type: Sequelize.STRING,
-      },
-      userRole: {
+      state: {
         type: Sequelize.INTEGER,
+      },
+      totalPrice: {
+        type: Sequelize.FLOAT,
+      },
+      approveComment: {
+        type: Sequelize.STRING,
       },
     },
     {
       sequelize,
-      modelName: "user",
+      modelName: "purchase_order",
     }
   );
 };
-exports.User = User;
+exports.PurchaseOrder = PurchaseOrder;
