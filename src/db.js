@@ -66,7 +66,7 @@ exports.init = () => {
 
       // Return order relationships
       returnOrderModel.ReturnOrder.belongsTo(purchaseOrderModel.PurchaseOrder);
-
+      returnOrderModel.ReturnOrder.belongsTo(userModel.User, { as: "owner" });
       (async () => {
         await sequelize.sync({ force: true });
         seeder.seedAdmin();
