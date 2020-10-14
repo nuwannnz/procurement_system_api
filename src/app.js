@@ -5,6 +5,8 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const usersRouter = require("./routes/users");
+const itemsRouter = require("./routes/items");
+const budgetsRouter = require("./routes/budgets");
 
 const db = require("./db");
 
@@ -22,5 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // apply routes
 app.use("/users", usersRouter);
+app.use("/items", itemsRouter);
+app.use("/budgets", budgetsRouter);
 
 module.exports = app;
