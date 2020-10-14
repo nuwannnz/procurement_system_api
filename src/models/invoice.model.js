@@ -12,12 +12,15 @@ exports.init = (sequelize) => {
       },
       payed: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       totalValue: {
         type: Sequelize.FLOAT,
       },
       payedDate: {
         type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: null,
       },
     },
     {
