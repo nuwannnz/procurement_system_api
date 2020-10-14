@@ -21,6 +21,7 @@ exports.init = (sequelize) => {
       },
       approveComment: {
         type: Sequelize.STRING,
+        defaultValue: "",
       },
     },
     {
