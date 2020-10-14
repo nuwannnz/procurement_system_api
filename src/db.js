@@ -66,12 +66,13 @@ exports.init = () => {
 
       // Return order relationships
       returnOrderModel.ReturnOrder.belongsTo(purchaseOrderModel.PurchaseOrder);
-
-      (async () => {
-        await sequelize.sync({ force: true });
-        seeder.seedAdmin();
-        seeder.seedBudget();
-      })();
+      returnOrderModel.ReturnOrder.belongsTo(userModel.User, { as: "owner" })(
+        async () => {
+          await sequelize.sync({ force: true });
+          seeder.seedAdmin();
+          seeder.seedBudget();
+        }
+      )();
     })
     .catch((err) => {
       console.log("Failed to connect to database", err);

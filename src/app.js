@@ -9,6 +9,7 @@ const itemsRouter = require("./routes/items");
 const budgetsRouter = require("./routes/budgets");
 const purchaseOrderRouter = require("./routes/purchaseOrder");
 const invoiceOrderRouter = require("./routes/invoice");
+const returnOrderRouter = require("./routes/returnOrders");
 
 const db = require("./db");
 
@@ -30,5 +31,6 @@ app.use("/items", itemsRouter);
 app.use("/budgets", budgetsRouter);
 app.use("/orders", purchaseOrderRouter);
 app.use("/invoice", invoiceOrderRouter);
+app.use("/returns", returnOrderRouter);
 
 module.exports = app;

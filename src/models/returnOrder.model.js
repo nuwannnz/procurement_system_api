@@ -10,9 +10,6 @@ exports.init = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      description: {
-        type: Sequelize.STRING,
-      },
       state: {
         type: Sequelize.INTEGER,
       },
@@ -21,6 +18,7 @@ exports.init = (sequelize) => {
       },
       approveComment: {
         type: Sequelize.STRING,
+        defaultValue: "",
       },
     },
     {

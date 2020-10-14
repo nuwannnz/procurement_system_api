@@ -1,13 +1,11 @@
-import { where } from "sequelize/types";
-
 const { Invoice } = require("../models/invoice.model");
 
-export const createInvoice = async ({ totalValue, ownerId, orderId }) => {
+const createInvoice = async ({ totalValue, ownerId, orderId }) => {
   const createdInvoice = await Invoice.create({ totalValue, ownerId, orderId });
   return createdInvoice;
 };
 
-export const payInvoice = async (invoiceId) => {
+const payInvoice = async (invoiceId) => {
   const updatedInvoice = await Invoice.update(
     { payed: true, payedDate: new Date() },
     { where: { id: invoiceId } }
@@ -15,7 +13,7 @@ export const payInvoice = async (invoiceId) => {
   return updatedInvoice;
 };
 
-export const deleteInvoice = async (invoiceId) => {
+const deleteInvoice = async (invoiceId) => {
   const deleteCount = await Invoice.destroy({ where: { id: invoiceId } });
   return deleteCount === 1;
 };
