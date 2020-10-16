@@ -4,6 +4,18 @@ const { verifyJWTToken } = require("./middleware");
 
 const budgetService = require("../services/budget.service");
 
+router.get("/", verifyJWTToken, async (req, res, next) => {
+  try {
+    // create item
+    const monthlyBudget = await budgetService.getMonthlyBudget();
+    const billBudget = await budgetService.getBillBudget();
+    return res.json({ monthlyBudget, billBudget });
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get monthly budget" });
+  }
+});
+
 router.patch("/month", verifyJWTToken, async (req, res, next) => {
   // extract data
   const { value } = req.body;
