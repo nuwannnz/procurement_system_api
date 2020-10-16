@@ -65,6 +65,12 @@ const getUserEmails = async () => {
   return users.map((user) => user.email);
 };
 
+const getUsers = async () => {
+  const users = await User.findAll();
+
+  return users.filter((user) => user.userRole !== 1);
+};
+
 /**
  * This function will generate a JWT with the
  * given email
@@ -88,7 +94,8 @@ const createUser = async ({ fName, lName, role, password, email }) => {
 };
 
 const removeUser = async (userId) => {
-  await User.destroy({ where: { id: userId } });
+  const deleteCount = await User.destroy({ where: { id: userId } });
+  return deleteCount === 1;
 };
 
 module.exports = {
@@ -98,4 +105,6 @@ module.exports = {
   generateToken,
   getUserEmails,
   createUser,
+  getUsers,
+  removeUser,
 };
