@@ -13,6 +13,9 @@ exports.init = (sequelize) => {
       name: {
         type: Sequelize.STRING,
       },
+      address: {
+        type: Sequelize.STRING,
+      },
     },
     {
       sequelize,

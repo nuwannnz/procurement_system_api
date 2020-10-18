@@ -14,8 +14,18 @@ const updateItem = async (itemId, itemDao) => {
   return await Item.update({ ...itemDao }, { where: { id: itemId } });
 };
 
+const getItemsOfSupplier = async (supplierId) => {
+  return await Item.findAll({ where: { supplierId } });
+};
+
+const getAllItems = async () => {
+  return await Item.findAll();
+};
+
 module.exports = {
   addItem,
   deleteItem,
   updateItem,
+  getItemsOfSupplier,
+  getAllItems,
 };

@@ -60,4 +60,35 @@ router.patch("/:id", verifyJWTToken, async (req, res, next) => {
   }
 });
 
+router.get("/supplier/:id", verifyJWTToken, async (req, res, next) => {
+  // extract id
+  const supplierId = req.params.id;
+
+  try {
+    // create item
+    const items = await itemService.getItemsOfSupplier(supplierId);
+    if (items) {
+      return res.json({ items });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get items" });
+  }
+});
+
+router.get("/", verifyJWTToken, async (req, res, next) => {
+  // extract id
+
+  try {
+    // create item
+    const items = await itemService.getAllItems();
+    if (items) {
+      return res.json({ items });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get items" });
+  }
+});
+
 module.exports = router;

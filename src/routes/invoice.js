@@ -6,7 +6,7 @@ const invoiceService = require("../services/invoice.service");
 
 router.post("/", verifyJWTToken, async (req, res, next) => {
   // extract data
-  const { totalValue, ownerId, oderId } = req.body;
+  const { totalValue, ownerId, orderId } = req.body;
 
   try {
     // create item
@@ -42,7 +42,7 @@ router.delete("/:id", verifyJWTToken, async (req, res, next) => {
   }
 });
 
-router.patch("pay/:id", verifyJWTToken, async (req, res, next) => {
+router.patch("/pay/:id", verifyJWTToken, async (req, res, next) => {
   // extract data
   const invoiceId = req.params.id;
 
@@ -56,6 +56,36 @@ router.patch("pay/:id", verifyJWTToken, async (req, res, next) => {
   } catch (error) {
     console.error(error);
     res.json({ error: "Failed to pay invoice" });
+  }
+});
+
+router.get("/", verifyJWTToken, async (req, res, next) => {
+  // extract data
+
+  try {
+    // create item
+    const invoices = await invoiceService.getAllInvoices();
+    if (invoices) {
+      return res.json({ invoices });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get invoices" });
+  }
+});
+
+router.get("/supplier/:id", verifyJWTToken, async (req, res, next) => {
+  // extract data
+  const supId = req.params.id;
+  try {
+    // create item
+    const invoices = await invoiceService.getAllInvoicesOfSupplier(supId);
+    if (invoices) {
+      return res.json({ invoices });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get invoices of supplier" });
   }
 });
 

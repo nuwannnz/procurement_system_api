@@ -12,6 +12,20 @@ const seedAdmin = () => {
         password: "admin",
         email: "admin@admin.com",
       });
+      await require("./services/user.service").createUser({
+        fName: "sitem",
+        lName: "sitem",
+        role: 4,
+        password: "1234",
+        email: "a@a.com",
+      });
+      await require("./services/user.service").createUser({
+        fName: "sup",
+        lName: "sup",
+        role: 5,
+        password: "1234",
+        email: "b@b.com",
+      });
     }
   })();
 };

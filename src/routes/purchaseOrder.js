@@ -105,4 +105,51 @@ router.patch("/status/:id", verifyJWTToken, async (req, res, next) => {
   }
 });
 
+router.get("/of/:ownerId", verifyJWTToken, async (req, res, next) => {
+  // extract data
+  const ownerId = req.params.ownerId;
+
+  try {
+    // create item
+    const orders = await purchaseOrderService.getPurchaseOrderOfOwner(ownerId);
+    if (orders) {
+      return res.json({ orders });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get purchase orders of given owner" });
+  }
+});
+
+router.get("/supplier/:supId", verifyJWTToken, async (req, res, next) => {
+  // extract data
+  const supId = req.params.supId;
+
+  try {
+    // create item
+    const orders = await purchaseOrderService.getPurchaseOrderOfSupplier(supId);
+    if (orders) {
+      return res.json({ orders });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get purchase orders of given supplier" });
+  }
+});
+
+router.get("/", verifyJWTToken, async (req, res, next) => {
+  // extract data
+
+  try {
+    // create item
+    const orders = await purchaseOrderService.getPurchaseOrders();
+    if (orders) {
+      return res.json({ orders });
+    }
+  } catch (error) {
+    console.error(error);
+    res.json({ error: "Failed to get purchase orders" });
+  }
+});
+
 module.exports = router;
